@@ -1,0 +1,90 @@
+// Tooltip for Logout
+[data-tooltip] {
+  cursor: pointer;
+  z-index: 120;
+	width: 160px;
+  &:before,
+  &:after {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    @include transform(scale(0, 0));
+    @include transition(all 0s linear);
+  }
+  &:before {
+    background-color: rgba(black, .75);
+    border-radius: 2px;
+    box-shadow: 0 0 1px $grey-border;
+    color: #fff;
+    content: attr(data-tooltip);
+    font-size: 13px;
+    // left: -43px;
+    line-height: 1;
+    padding: 10px 20px;
+    position: absolute;
+    text-align: center;
+    text-shadow: 0 1px 0 black;
+    top: 51px;
+    @include transform-origin(top center);
+  }
+  &:after {
+    border-bottom: 9px solid rgba(black, .75);
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    content: ' ';
+    font-size: 0;
+    right: 50%;
+    line-height: 0;
+    margin-left: -5px;
+    position: absolute;
+    top: 42px;
+    width: 0;
+    @include transform-origin(bottom center);
+  }
+  &:hover {
+    &:before {
+      @include transition(all 150ms cubic-bezier(.175, .885, .21, 1.175) 450ms);
+    }
+    &:after {
+      @include transition(all 150ms cubic-bezier(.175, .885, .21, 1.175) 600ms);
+    }
+  }
+  &:hover:before,
+  &:hover:after {
+    opacity: 1;
+    visibility: visible;
+    @include transform(scale(1, 1));
+  }
+}
+.share_button {
+  &[data-tooltip]:before {
+    width: 225px;
+    right: 15px;
+  }
+}
+.share_link_generated {
+  [data-tooltip] {
+    &:before {
+      // width: 150px;
+      right: 15px;
+    }
+    &:after {
+      right: 25px;
+
+    }
+  }
+}
+.check-detail a {
+	position: relative;
+	&[data-tooltip] {
+		&:before {
+			top: 31px;
+			left: -40px;
+			width: 200px;
+		}
+		&:after {
+			right: 0;
+			top: 22px;
+		}
+	}
+}

@@ -1,0 +1,56 @@
+//     ____        __  __
+//    / __ )__  __/ /_/ /_____  ____  _____
+//   / __  / / / / __/ __/ __ \/ __ \/ ___/
+//  / /_/ / /_/ / /_/ /_/ /_/ / / / (__  )
+// /_____/\__,_/\__/\__/\____/_/ /_/____/
+.button,
+button {
+  &.default {
+    @include button($grey-button);
+    border-bottom-color: #9da8b4;
+    border-color: #b4bcc6;
+    box-shadow: 0px 1px 0px #FFF inset, 0px 1px 1px rgba(0, 0, 0, 0.025);
+    text-shadow: none !important;
+    @include background(linear-gradient(#fff, #e2e3e5));
+    &:hover {
+      border-bottom-color: #8693a2;
+      border-color: #8693a3;
+    }
+    &--destructive {
+      &:hover {
+        @include button($destructive-button);
+      }
+    }
+  }
+  &.primary {
+    @include button($primary-button);
+  }
+  &.secondary {
+    @include button($secondary-button);
+		&.subscribe {
+			position: absolute;
+			top: 20px;
+			right: 13.7%;
+			z-index: 5;
+			width: 60%;
+		}
+  }
+  &.destructive {
+    @include button($destructive-button);
+  }
+  &.align-left {
+    margin-left: 0;
+  }
+	&.subscribe-button {
+		@include button($secondary-button);
+		float: left;
+		margin-left: 10px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		&.multiple-subscribe {
+			float: none;
+			margin-left: 0;
+		}
+	}
+}
+

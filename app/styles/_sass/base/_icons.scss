@@ -1,0 +1,44 @@
+//     ____
+//    /  _/________  ____  _____
+//    / // ___/ __ \/ __ \/ ___/
+//  _/ // /__/ /_/ / / / (__  )
+// /___/\___/\____/_/ /_/____/
+//
+.icon {
+  background-color: transparent;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  &:before {
+    content: '';
+    display: inline-block;
+    width: 16px;
+  }
+  &.left {
+    margin: 0 .8rem 0 0;
+  }
+  &.right {
+    margin: 0 0 0 .8rem;
+  }
+  &.large {
+    &:before {
+      width: 24px;
+    }
+  }
+  &.small {
+    background-size: 10px auto;
+  }
+}
+.icon {
+  &.icon-link-grey {
+    background-image: url('../images/icon-link-grey.svg');
+    background-size: 12px auto;
+  }
+  &.icon-copy-grey {
+    background-image: url('../images/icon-copy-grey.svg');
+    background-size: 14px auto;
+  }
+  &.external-link {
+    background-image: url('../images/external-link.svg');
+    background-size: 10px auto;
+  }
+}

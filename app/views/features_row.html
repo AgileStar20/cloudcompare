@@ -1,0 +1,18 @@
+<tr ng-show="show_feature_headings[feature_key] && show_feature_rows[feature_key]">
+	<td ng-controller="FilterOptionsController" class="filter-features">
+    <div class="sidebar--batch-action">
+      <span class="clear" ng-show="hasAnySelectedFilters()" ng-click="clearAll()">Clear All</span>
+    </div>
+		<filter-option-selector filter-option="getFilterOptions($parent.$parent.$index, feature_key)" feature-key="feature_key" selected-filters="selected_filters">
+	</td>
+  <td ng-repeat="vendor in vendors" class="cloud-cell {{vendor.short_name}}">
+    <ul ng-show="getCategoryNames(vendor[feature_key]).length">
+      <li ng-repeat="feature in getCategoryNames(vendor[feature_key]) | orderBy: value" ng-class="{checked: isChecked(feature.name)}" class="{{feature.state}} {{feature_key}}-{{$index}}" ng-switch="feature.url">
+				<a href="{{feature.url}}" target="_blank" ng-switch-default></span>{{ feature.display }} <span class="icon external-link left" /></a>
+				<span ng-switch-when="null">{{ feature.display }}</span>
+				<span ng-switch-when="multi" ng-bind-html="feature.multidisplay | multi"></span>
+			</li>
+    </ul>
+    <span ng-hide="getCategoryNames(vendor[feature_key]).length" class="no-data">No data available</span>
+  </td>
+</tr>

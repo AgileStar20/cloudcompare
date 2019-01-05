@@ -1,0 +1,119 @@
+//     ______            __
+//    / ____/___  ____  / /______
+//   / /_  / __ \/ __ \/ __/ ___/
+//  / __/ / /_/ / / / / /_(__  )
+// /_/    \____/_/ /_/\__/____/
+
+$helvetica: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$bariol: "bariol", Helvetica Neue, Helvetica, Arial, sans-serif;
+
+$giga: 4.8rem;
+$alpha: 3rem;
+$beta: 2.4rem;
+$gamma: 1.6rem;
+$delta: 1.4rem;
+$epsilon: 1.3rem;
+$zeta: 1.1rem;
+
+//   ______                                         __
+//  /_  __/_  ______  ____  ____ __________ _____  / /_  __  __
+//   / / / / / / __ \/ __ \/ __ `/ ___/ __ `/ __ \/ __ \/ / / /
+//  / / / /_/ / /_/ / /_/ / /_/ / /  / /_/ / /_/ / / / / /_/ /
+// /_/  \__, / .___/\____/\__, /_/   \__,_/ .___/_/ /_/\__, /
+//     /____/_/          /____/          /_/          /____/
+//
+@font-face {
+    font-family: 'bariol';
+    src: url('../fonts/bariol_regular-webfont.eot') format('eot'),
+         url('../fonts/bariol_regular-webfont.woff') format('woff'),
+         url('../fonts/bariol_regular-webfont.ttf') format('truetype'),
+         url('../fonts/bariol_regular-webfont.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+};
+@font-face {
+    font-family: 'bariol';
+    src: url('../fonts/bariol_bold-webfont.eot') format('eot'),
+         url('../fonts/bariol_bold-webfont.woff') format('woff'),
+         url('../fonts/bariol_bold-webfont.ttf') format('truetype'),
+         url('../fonts/bariol_bold-webfont.svg') format('svg');
+    font-weight: bold;
+    font-style: normal;
+};
+@font-face {
+    font-family: 'bariol';
+    src: url('../fonts/bariol_light-webfont.eot') format('eot'),
+         url('../fonts/bariol_light-webfont.woff') format('woff'),
+         url('../fonts/bariol_light-webfont.ttf') format('truetype'),
+         url('../fonts/bariol_light-webfont.svg') format('svg');
+    font-weight: 300;
+    font-style: normal;
+};
+// Extends
+%text-shadow-up {
+  text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+}
+%text-shadow-down-white {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .75);
+}
+// Styling
+$em-base: 13px !important;
+
+html {
+  font-size: 62.5%;
+}
+body,
+input,
+select,
+textarea {
+  color: $text;
+  font-family: $helvetica;
+  font-size: $epsilon;
+  line-height: 1.615;
+
+  -webkit-font-smoothing: antialiased;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $bariol;
+  font-weight: normal;
+  line-height: 1;
+  margin: 0;
+}
+h1 {
+  font-size: $alpha;
+  &.page-title {
+    font-weight: 300;
+  }
+}
+h2 {
+  font-size: $beta;
+}
+h3 {
+  font-size: $gamma;
+}
+h4 {
+  font-size: $delta;
+}
+h5 {
+  font-size: $epsilon;
+}
+h6 {
+  font-size: $zeta;
+}
+p {
+  line-height: 1.4;
+  margin-bottom: $zeta;
+  max-width: 80ch;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}

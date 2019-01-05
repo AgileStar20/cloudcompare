@@ -1,0 +1,36 @@
+/*==============================================================================
+* 015 BANNER SLIDE OUT
+==============================================================================*/
+
+
+#slidebox {
+    padding: 10px 0px 4px 10px;
+    background-color: #fff;
+    border-top: 3px solid $orange;
+    position: fixed;
+    bottom: 0;
+    right: -724px;
+    -moz-box-shadow: -2px 0 5px #aaa;
+    -webkit-box-shadow: -2px 0 5px #aaa;
+    box-shadow: -2px 0 5px #aaa;
+}
+
+a.close {
+    background: transparent url(../images/close.gif) no-repeat top left;
+    width: 13px;
+    height: 13px;
+    position: absolute;
+    cursor: pointer;
+    top: 10px;
+    right: 10px;
+}
+
+a.close:hover {
+    background-position: 0 -13px;
+}
+
+@media only screen and (max-device-width: 480px) {
+    #slidebox {
+       width: 100%;
+    }
+}

@@ -1,0 +1,17 @@
+<section class="sidebar--filter">
+	<span class="sidebar--title mobile" ng-click="filter_option.expanded = !filter_option.expanded" ng-class="{'expanded': filter_option.expanded, 'collapsed': !filter_option.expanded}">
+	   <span>{{ filter_option.label }}</span>
+	  </span>
+  <ul class="sidebar--list">
+    <li class="sidebar--option {{filter_option.key}}-{{$index}}" ng-repeat="value in filter_option.categories | orderBy:'toString()'">
+      <div class="checkbox_wrap">
+        <input type="checkbox" id="{{filter_option.key}}::{{value}}" name="{{filter_option.key}}[]" value="{{value}}" ng-model="selected_filters[filter_option.key][value]" />
+        <label for="{{filter_option.key}}::{{value}}" class="checkbox_label">{{ value }}</label>
+      </div>
+    </li>
+  </ul>
+  <!-- <div class="sidebar--filter-batch">
+    <span class="select">Select All</span> 
+    <span class="clear nga-fast nga-collapse nga-stagger-slow" ng-show="filter_option.expanded && hasAnySelectedFilters(filter_option.key)" ng-click="clearFilterKey(filter_option.key)">Clear Selection</span>
+  </div> -->
+</section>

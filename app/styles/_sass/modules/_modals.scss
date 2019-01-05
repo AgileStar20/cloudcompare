@@ -1,0 +1,75 @@
+//     __  ___          __      __
+//    /  |/  /___  ____/ /___ _/ /____
+//   / /|_/ / __ \/ __  / __ `/ / ___/
+//  / /  / / /_/ / /_/ / /_/ / (__  )
+// /_/  /_/\____/\__,_/\__,_/_/____/
+//
+// Override ngDialog styling
+.ngdialog.ngdialog-theme-default .ngdialog-content {
+    padding: 0 !important;
+    width: 520px !important;
+    border-radius: 3px !important;
+  }
+  .ngdialog-overlay {
+    background: #{"radial-gradient(ellipse closest-corner at 50% 45%, rgba(0, 0, 0, 0.2) 10%, rgba(0, 0, 0, 0.5) 100%)"} !important;
+  }
+.modal {
+  &--wrapper {
+    max-height: 90vh;
+    max-width: 90vw;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    @include box-style;
+  }
+  &--content {
+    padding: 30px;
+    display: flex;
+    flex: 1 0 auto;
+    overflow: auto;
+    background-color: white;
+  }
+  &--content-text {
+    color: $text;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  &--title {
+    border-bottom: 1px solid $grey-border-light;
+    padding: 20px 30px;
+    color: $heading;
+    font-weight: 300;
+  }
+  &--footer {
+    background: $body;
+    border-top: 1px solid $grey-border;
+    padding: 15px 30px;
+    font-size: 13px;
+    text-align: right;
+    @include transition(all 150ms linear);
+    &:hover {
+      @include transition(all 150ms linear);
+    }
+  }
+}
+
+// Cookie Consent Popup
+.cc-highlight .cc-btn:last-child {
+	width: 140px;
+	background: #ff9000;
+}
+
+.cc-highlight .cc-btn:last-child:hover {
+	background: #cc7300 !important;
+	text-decoration: none;
+}
+
+.cc-banner .cc-btn:first-child {
+	border-color: #fff !important;
+	width: 140px;
+}
+
+.cc-dismiss:hover {
+text-decoration: underline;
+}

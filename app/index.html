@@ -1,0 +1,261 @@
+<!doctype html>
+<html class="no-js">
+
+<head>
+  <meta charset="utf-8">
+  <title>Cloud Comparison | RightScale</title>
+  <meta name="description" content="Cloud Comparison is a free tool from RightScale for comparing features such as compute, storage, networking and more across public clouds.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="shortcut icon" href="https://assets.rightscale.com/uploads/images/favicon.ico">
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.css" />
+  <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-theme-default.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/ng-dialog/0.4.0/css/ngDialog.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/ng-dialog/0.4.0/css/ngDialog-theme-default.min.css">
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+  <script src="/web/js/cookieconsent.js"></script>
+	<base href="/cloud-comparison-tool/" />
+</head>
+
+<body ng-app="cloudcompareApp">
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+  <!-- Add your site or application content here -->
+  <div class="page-content layout--lg" ng-controller="MainCtrl" ng-cloak>
+    <div class="wrapper">
+      <!-- Header -->
+      <header class="app_header">
+        <a class="product_logo_wrap" href="/">
+          <span class="rightscale_logo"></span>
+          <!-- <img class="rightscale_logo" src="images/rightscale-cc-logo.svg" /> -->
+        </a>
+				<div class="export_link">
+          <a class="button default small" data-placement="bottom" ng-click="openExport()">
+            <span class="text">Export all data</span>
+          </a>
+				</div>
+				<div class="export_link" ng-show="total_selected_filters > 0">
+          <a class="button default small" data-placement="bottom" ng-click="openSelected()">
+            <span class="text">Export selected</span>
+          </a>
+				</div>
+         <div class="share_link expanded" ng-show="total_selected_filters > 0">
+          <div ng-show="share_link_generated" class="share_link_generated">
+            <input class="share_input" type="text" value="{{ share_link }}" id="copy" select="share_link_generated" />
+            <copy-button value="{{ share_link }}" before-tooltip="Copy link to clipboard"></copy-button>
+          </div>
+          <a ng-hide="share_link_generated" data-tooltip="Share the selected filters with a link" class="share_button button default small" ng-click="generateShareLink()" data-placement="bottom">
+            <span class="icon icon-link-grey left"></span><span class="text">Share selected filters</span>
+          </a>
+        </div>
+      </header>
+      <!-- Clouds -->
+      <section class="clouds-wrapper" ng-class="{'filters-visible': filters_visible}">
+        <section class="clouds">
+          <table>
+            <thead>
+              <tr>
+								<th class="filter-features">
+									<div class="logo"></div>
+									<span ng-show="show_subscribe == true" ng-click="openForm()" class="button secondary subscribe">Subscribe to Updates</span>
+								</th>
+                <th ng-repeat="vendor in vendors" class="{{vendor.short_name}} checked">
+                  <div class="logo">
+                    <img ng-src="{{vendor.logo}}">
+                  </div>
+                  <vendor-percentage-bar vendor="vendor"></vendor-percentage-bar>
+                </th>
+              </tr>
+            </thead>
+            <tbody ng-class="{'filters-selected': total_selected_filters > 0}">
+              <tr ng-repeat-start="(sectionKey, features) in sections" super-section-heading label="{{sectionKey}}" show-feature-headings="show_feature_headings" show-feature-rows="show_feature_rows"></tr>
+              <tr ng-repeat-start="feature in features" features-heading feature-key="{{feature.key}}" label="{{feature.label}}" show-feature-headings="show_feature_headings" show-feature-rows="show_feature_rows"></tr>
+              <tr ng-repeat-end features-row vendors="vendors" feature-key="{{feature.key}}" selected-filters="selected_filters" filter-options="filter_options" show-feature-headings="show_feature_headings" show-feature-rows="show_feature_rows" ></tr>
+              <tr ng-repeat-end ng-hide="true"></tr>
+            </tbody>
+          </table>
+        </section>
+        <section class="footer">
+          <span class="footer-legal">
+            &copy; 2016-2018 RightScale, Inc.
+          </span>
+          <span class="last-updated">
+            Last updated: 2018/08/20
+          </span>
+        </section>
+      </section>
+      <!-- Filter -->
+      <section class="filter">
+        <span ng-click="openHelp()" class="help-button"></span>
+        <span ng-click="openCopy()" class="copyright-button"></span>
+      </section>
+      <!-- Footer -->
+    </div>
+  </div>
+  <div class="page-content layout--sm" ng-controller="MainCtrl" ng-cloak>
+    <div class="wrapper">
+      <!-- Header -->
+      <header class="app_header">
+        <a class="product_logo_wrap" href="/">
+          <span class="rightscale_logo"></span>
+        </a>
+				<div class="export_link" ng-csv="exportAll()" csv-header="getHeaders()" filename="rightscale-cloud-comparison-data.csv">
+          <a class="button default small" data-placement="bottom">
+            <span class="text">Export all data</span>
+          </a>
+				</div>
+				<div class="export_link" ng-show="total_selected_filters > 0" ng-csv="exportSelected()" csv-header="getHeaders()" filename="rightscale-cloud-comparison-filtered-data.csv">
+          <a class="share_button button default small" data-placement="bottom">
+            <span class="text">Export selected</span>
+          </a>
+				</div>
+        <span ng-click="openHelp()" class="help-button"></span>
+      </header>
+      <!-- Clouds -->
+      <section class="clouds-wrapper" ng-class="{'filters-visible': filters_visible}">
+        <section class="clouds">
+          <table>
+            <thead>
+              <tr>
+                <th ng-repeat="vendor in vendors" class="{{vendor.short_name}} checked">
+                  <div class="logo">
+                    <img ng-src="{{vendor.logo_mobile}}">
+                  </div>
+                  <vendor-percentage-bar vendor="vendor"></vendor-percentage-bar>
+                </th>
+              </tr>
+            </thead>
+            <tbody ng-class="{'filters-selected': total_selected_filters > 0}">
+              <tr ng-repeat-start="(sectionKey, features) in sections" super-section-heading label="{{sectionKey}}" show-feature-headings="show_feature_headings" show-feature-rows="show_feature_rows"></tr>
+              <tr ng-repeat-start="feature in features" features-heading feature-key="{{feature.key}}" label="{{feature.label}}" show-feature-headings="show_feature_headings" show-feature-rows="show_feature_rows"></tr>
+              <tr ng-repeat-end features-row vendors="vendors" feature-key="{{feature.key}}" selected-filters="selected_filters" filter-options="filter_options" show-feature-headings="show_feature_headings" show-feature-rows="show_feature_rows" ></tr>
+              <tr ng-repeat-end></tr>
+            </tbody>
+          </table>
+        </section>
+      </section>
+			<!-- Sidebar -->
+			<section class="sidebar" ng-controller="FilterOptionsController">
+				<div class="sidebar--batch-action">
+					<span class="expand" ng-click="expandAll()" ng-class="{'expanded': isExpanded()}"><img ng-src="images/icon-chevron-white.svg">{{ isExpanded() ? 'Collapse All' : 'Expand All' }}</span>
+					<span class="clear" ng-show="hasAnySelectedFilters()" ng-click="clearAll()">Clear All</span>
+				</div>
+				<filter-option-selector ng-repeat="filter_option in filter_options" filter-option="filter_option" selected-filters="selected_filters">
+			</section>
+      <section class="footer" id="last">
+        <span class="footer-legal">
+            &copy; 2016-2018 RightScale, Inc.
+          </span>
+        <span class="last-updated">
+            Last updated: 2018/08/20
+          </span>
+      </section>
+      <!-- Footer -->
+    </div>
+  </div>
+  <script type="text/ng-template" id="modal">
+    <section class="ngdialog-message">
+      <section class="modal--wrapper">
+        <h1 class="modal--title">What Is RightScale Cloud Comparison?</h1>
+        <div class="modal--content">
+          <div class="modal--content-text">
+            <p>Cloud Comparison is a free tool that enables you to compare features across the leading public clouds. Simply select your requirements to determine which cloud best fits your needs.</p>
+            <p>To provide feedback or for questions, <a href="http://www.rightscale.com/contact" target="_new">contact us</a>.</p>
+            <p>For more info, see <a href="http://docs.rightscale.com/ca/cloud_comp/ca_getting_started_with_cloud_comparison.html" target="_new">documentation</a>.</p>
+          </div>
+        </div>
+        <div class="modal--footer">
+          <div class="action-bar">
+            <button class="secondary" ng-click="closeThisDialog()">Continue to Cloud Comparison</button>
+          </div>
+        </div>
+      </section>
+    </section>
+    </section>
+  </script>
+ <email-subscribe-updates></email-subscribe-updates>
+ <email-exported-data></email-exported-data>
+ <email-selected-data></email-selected-data>
+  <!-- Google Tag Manager -->
+  <noscript>
+    <iframe src="//www.googletagmanager.com/ns.html?id=GTM-5426Z9" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <script>
+  (function(w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({
+      'gtm.start': new Date().getTime(),
+      event: 'gtm.js'
+    });
+    var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s),
+      dl = l != 'dataLayer' ? '&l=' + l : '';
+    j.async = true;
+    j.src =
+      '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+    f.parentNode.insertBefore(j, f);
+  })(window, document, 'script', 'dataLayer', 'GTM-5426Z9');
+  </script>
+  <!-- End Google Tag Manager -->
+  <!-- build:js(.) scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-touch/angular-touch.js"></script>
+  <script src="bower_components/bootstrap-js-components/dist/tooltip.js"></script>
+  <script src="bower_components/lodash/lodash.js"></script>
+  <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
+  <script src="bower_components/clipboard/dist/clipboard.js"></script>
+  <script src="bower_components/ng-csv/build/ng-csv.min.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:js({.tmp,app}) scripts/scripts.js -->
+  <script src="scripts/app.js"></script>
+  <script src="scripts/controllers/main.js"></script>
+  <script src="scripts/controllers/filter_options_controller.js"></script>
+	<script src="scripts/controllers/form_controller.js"></script>
+  <script src="scripts/directives/copy_button.js"></script>
+	<script src="scripts/directives/email_subscribe_updates.js"></script>
+	<script src="scripts/directives/email_exported_data.js"></script>
+	<script src="scripts/directives/email_selected_data.js"></script>
+  <script src="scripts/directives/features_row.js"></script>
+  <script src="scripts/directives/features_heading.js"></script>
+  <script src="scripts/directives/filter_option_selector.js"></script>
+  <script src="scripts/directives/super_section_heading.js"></script>
+  <script src="scripts/directives/vendor_percentage_bar.js"></script>
+  <script src="scripts/services/cloud_vendors_service.js"></script>
+  <script src="scripts/services/filter_options_service.js"></script>
+  <script src="scripts/services/link_service.js"></script>
+  <script src="scripts/services/selected_filters_service.js"></script>
+	<script src="scripts/controllers/jquery-1.10.2.min.js"></script>
+	<script src="scripts/controllers/jQueryString-2.0.2-Min.js"></script>
+	<script src="scripts/controllers/customForm.js"></script>
+	<script src="scripts/controllers/magnific.js"></script>
+  <script src="scripts/controllers/slidebox.js"></script>
+  <!-- endbuild -->
+  <!-- <script>
+    $('body').tooltip({
+      selector: '[tooltip],[rel=tooltip]',
+      trigger: 'hover',
+      container: 'body'
+    });
+  </script> -->
+<script src="/web/js/cookieconsent.js"></script>
+<script src="/web/js/cookie-consent-check.js"></script>
+  <div id="slidebox"><a class="close">&nbsp;</a><a href="/lp/state-of-the-cloud?campaign=7010g0000016KGW" target="_blank"><img class="shadow alignCenter" style="width: 95%; height: auto;" ng-src="images/rightscale-cloud-comparison-state-of-the-cloud-offer.jpg"></a></div>
+</body>
+
+</html>

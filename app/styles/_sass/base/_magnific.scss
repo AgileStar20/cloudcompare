@@ -1,0 +1,202 @@
+/*==============================================================================
+* VARIABLES
+==============================================================================*/
+//sass variables - colors
+$orange: #ff9000;
+$greyBlue: #778598;
+$blue: #0c5ca6;
+$darkBlue: #2a3037;
+$lightBlue: #ebf4fd;
+$quizBlue: #162f6c;
+$bodyFontColor: #58595b;
+$footerLinkColor: #d2d2d2;
+$borderColor: #9ebedb;
+$navBG: #4e5864;
+$abBlue: #138CFE;
+
+//sass variables - misc
+$maxWidthUnits: 1024;
+$maxWidth: $maxWidthUnits+px;
+
+//sass variables - fonts
+$boldWeight: 700;
+$normalWeight: 400;
+$fontStack: 'Gotham SSm A', 'Gotham SSm B',arial,sans-serif;
+$fontStackBook: 'Gotham SSm A', 'Gotham SSm B',arial,sans-serif;
+$bodyFont: $normalWeight 15px/23px $fontStack;
+
+//sass variables - breakpoints
+$break-small: 599px;
+$break-regular: 770px;
+$break-large: 1024px;
+
+// Inline popups
+.white-popup,.mfp-figure,.blue-modal {
+    display: block;
+    background-color:  #32383f;
+    width: 80%;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    font-size: 15px;
+    font-weight: $normalWeight;
+    color: #fff;
+    a {color: $blue;}
+    .mfp-close {
+        width: 29px;
+        height: 29px;
+//        background: url(../../../images/sprite.png) no-repeat 0 -255px;
+        text-indent: -999px;
+        text-align: left;
+        overflow: hidden;
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        z-index: 9999;
+    }
+    h1,h2,h3,h4,h5,h6 {
+        font-weight: $boldWeight;
+        color: $orange;
+        margin: 1.2em 0 .7em;
+        &:first-child {margin-top:0}
+    }
+    h1 {font-size: 1.9em;}
+    h2 {font-size: 1.5em;}
+    h3 {font-size: 1.4em;}
+    h4 {font-size: 1.1em;}
+    h5 {font-size: 1em;}
+    h6 {font-size: .9em;}
+    small {font-size:.8em;}
+    .scroll-table {
+        overflow-x: scroll;
+        position: relative;
+    }
+    .basic-blue-head {
+        background-color: #fff;
+        color: #666;
+        margin:0;
+        padding: 0;
+        border: 0;
+        width: 100%;
+        word-wrap:normal;
+        font-size: .9em;
+        .vbottom td {vertical-align: bottom}
+        .vmiddle td {vertical-align: middle}
+        .vtop td {vertical-align: top}
+        td {
+            padding: 10px 0;
+            p {
+                line-height: 1.2em;
+                font-size: .9em;
+                &:last-child {margin-bottom:0}
+            }
+            h1,h2,h3,h4,h5,h6 {
+                color: $blue;
+                text-transform: uppercase;
+                line-height: 1.1em;
+            }
+            &:first-child {
+                h1,h2,h3,h4,h5,h6 {margin-bottom:0}
+            }
+        }
+        thead {
+            td {
+                background-color: $blue;
+                color: #fff;
+                text-transform: uppercase;
+                font-weight: $boldWeight;
+                text-align: center;
+                line-height: 1em;
+            }
+        }
+        tbody {
+            font-size: .9em;
+            td {
+                border-bottom: 1px solid #f1f1f1;
+                border-left: 1px solid #f1f1f1;
+                margin-left: -1px;
+                &:first-child {
+                    border-left: 0;
+                }
+                small {
+                    font-size: .7em;
+                    line-height: 1.5em;
+                    a {
+                        display:block;
+                        color: $blue;
+                    }
+                    ul {
+                        list-style: disc;
+                        margin-left: 13px;
+                    }
+                }
+            }
+        }
+    }
+    &#rcu-modal .basic-blue-head {
+        border-collapse:separate;
+        width: 1200px;
+        td {
+            padding: 10px 1%;
+            line-height: 18px;
+        }
+        thead td {
+            line-height: 16px;
+            font-size: 12px;
+        }
+    }
+    &#support-modal .basic-blue-head {
+        tbody td {
+            width:14.66%;
+            padding: 10px 1%;
+            &:nth-child(15n-12) {background-color:#f6f6f6;}
+        }
+    }
+}
+.mfp-wrap {overflow: hidden !important;}
+.mfp-content {
+    zoom: 0.95;
+    .mfp-figure {
+        background-color: #fff;
+        margin: 10px auto 0;
+        padding: 0;
+        width: auto;
+        max-width: 100%;
+        color: $bodyFontColor;
+        figure {
+            padding: 0px;
+            img {
+                display: block;
+                /*width: 100%;*/
+                width: auto !important; /* fix for ie and firfox AUTO if changed we will have issue again */
+                height: auto !important;
+            }
+        }
+        .mfp-counter {
+            margin-right: 35px;
+            font-size: .7em;
+        }
+    }
+}
+.blue-modal {
+    padding: 0;
+    background-color: #fff;
+    max-width: 450px;
+    padding-bottom: 20px;
+    header {
+        background-color: $blue;
+        padding: 10px 0;
+        h2 {
+            color: #fff;
+            margin: 0;
+            padding: 0 0 0 20px;;
+            font-weight: normal;
+        }
+    }
+    h3,h4,p {
+        color: $bodyFontColor;
+        padding: 0 20px;
+    }
+    h4 {font-weight: normal;}
+}
