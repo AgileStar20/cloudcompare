@@ -1,0 +1,57 @@
+{
+	"Basic": [{
+		"key": "vm_sizes",
+		"label": "VM Sizes"
+	}, {
+		"key": "sla_terms",
+		"label": "SLA Terms"
+	}, {
+		"key": "discounts",
+		"label": "Discounts"
+	}, {
+		"key": "certifications",
+		"label": "Certifications"
+	}, {
+		"key": "operating_systems",
+		"label": "Operating Systems"
+	}, {
+		"key": "regions",
+		"label": "Regions"
+	}, {
+		"key": "countries",
+		"label": "Countries"
+	}],
+	"Core Services": [{
+		"key": "compute_services",
+		"label": "Compute Services"
+	}, {
+		"key": "network_services",
+		"label": "Network Services"
+	}, {
+		"key": "storage_services",
+		"label": "Storage Services"
+	}],
+	"Database Services": [{
+		"key": "relational_dbs",
+		"label": "Relational Databases"
+	}, {
+		"key": "nonrelational_dbs",
+		"label": "Non_Relational Databases"
+	}, {
+		"key": "other_dbs",
+		"label": "Other DBaaS"
+	}],
+	"Additional Services": [{
+		"key": "data_analytics_services",
+		"label": "Data & Analytics Services"
+	}, {
+		"key": "ai_machine_learning",
+		"label": "AI and Machine Learning"
+	}, {
+		"key": "application_services",
+		"label": "Application Services"
+	}, {
+		"key": "security_identity",
+		"label": "Security & Identity"
+	}]
+}
