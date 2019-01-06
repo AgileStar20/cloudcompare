@@ -1,23 +1,16 @@
 import React, { Component } from 'react';
 import vendors from './vendors';
 import sections from './sections';
+import Field from './field'
 
 import './App.css';
 
 class App extends Component {
   render() {
-    const sections_fields = [];
-
-    let data = '';
+    let sections_fields = [];
     for(let key in sections){
-      data += <tr super-section-heading label={key}>asd</tr>
-      for (var i = 0; i < sections[key].length; i++) {
-        data += <tr label={sections[key][i].label}></tr>
-        data += <tr></tr>
-      }
-      data += <tr></tr>
+      sections_fields.push(key);
     }
-
     return (
       <div class="page-content layout--lg">
         <div class="wrapper">
@@ -40,26 +33,20 @@ class App extends Component {
                       <div class="logo"></div>
                       <span class="button secondary subscribe">Subscribe to Updates</span>
                     </th>
-                    {vendors.map(vendor => {
-                      return <th class={vendor.short_name}>
+                    {vendors.map(vendor => { return (
+                      <th class={vendor.short_name}>
                         <div class="logo">
                           <img src={'/'+vendor.logo}></img>
                         </div>
                       </th>
-                    })}
+                    )})}
                   </tr>
                 </thead>
                 <tbody ng-class="{'filters-selected': total_selected_filters > 0}">
 
-                  
-
-                  <tr ng-repeat-start="(sectionKey, features) in sections" super-section-heading label="{{sectionKey}}" show-feature-headings="show_feature_headings" show-feature-rows="show_feature_rows"></tr>
-
-                    <tr ng-repeat-start="feature in features" features-heading feature-key="{{feature.key}}" label="{{feature.label}}" show-feature-headings="show_feature_headings" show-feature-rows="show_feature_rows"></tr>
-
-                    <tr ng-repeat-end features-row vendors="vendors" feature-key="{{feature.key}}" selected-filters="selected_filters" filter-options="filter_options" show-feature-headings="show_feature_headings" show-feature-rows="show_feature_rows" ></tr>
-
-                  <tr ng-repeat-end ng-hide="true"></tr>
+                  {sections_fields.map(field => { return (
+                    <Field field={field} sections={sections[field]} />
+                  )})}
 
                 </tbody>
               </table>
