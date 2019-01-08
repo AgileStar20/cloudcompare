@@ -1,0 +1,104 @@
+[
+  {
+    "key": "vm_sizes",
+    "label": "VM Sizes",
+    "values": "vm_sizes",
+    "expanded": true
+  },
+  {
+    "key": "sla_terms",
+    "label": "SLA Terms",
+    "values": "sla_terms",
+    "expanded": true
+  },
+  {
+    "key": "discounts",
+    "label": "Discounts",
+    "values": "discounts",
+    "expanded": true
+  },
+  {
+    "key": "certifications",
+    "label": "Security Certifications",
+    "values": "certifications",
+    "expanded": true
+  },
+  {
+    "key": "operating_systems",
+    "label": "Operating Systems",
+    "values": "operating_systems",
+    "expanded": true
+  },
+  {
+    "key": "regions",
+    "label": "Regions",
+    "values": "regions",
+    "expanded": true
+  },
+  {
+    "key": "countries",
+    "label": "Countries",
+    "values": "countries",
+    "expanded": true
+  },
+  {
+    "key": "compute_services",
+    "label": "Compute Services",
+    "values": "compute_services",
+    "expanded": true
+  },
+  {
+    "key": "network_services",
+    "label": "Network Services",
+    "values": "network_services",
+    "expanded": true
+  },
+  {
+    "key": "storage_services",
+    "label": "Storage Services",
+    "values": "storage_services",
+    "expanded": true
+  },
+  {
+    "key": "relational_dbs",
+    "label": "Relational Databases",
+    "values": "relational_dbs",
+    "expanded": true
+  },
+  {
+    "key": "nonrelational_dbs",
+    "label": "Non-Relational Databases",
+    "values": "nonrelational_dbs",
+    "expanded": true
+  },
+  {
+    "key": "other_dbs",
+    "label": "Other DBaaS",
+    "values": "other_dbs",
+    "expanded": true
+  },
+	{
+		"key": "data_analytics_services",
+		"label": "Data & Analytics Services",
+		"values": "data_analytics_services",
+		"expanded": true
+	},
+  {
+		"key": "ai_machine_learning",
+		"label": "AI and Machine Learning",
+		"values": "ai_machine_learning",
+		"expanded": true
+	},
+  {
+    "key": "application_services",
+    "label": "Application Services",
+    "values": "application_services",
+    "expanded": true
+  },
+  {
+    "key": "security_identity",
+    "label": "Security & Identity",
+    "values": "security_identity",
+    "expanded": true
+  }
+]

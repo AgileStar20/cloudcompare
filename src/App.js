@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import vendors from './vendors';
-import sections from './sections';
-import Field from './field'
-
-import './App.css';
-
+import Section from './components/section';
+import main from './services/main';
 class App extends Component {
   render() {
     let sections_fields = [];
-    for(let key in sections){
+    for(let key in main.sections){
       sections_fields.push(key);
     }
     return (
@@ -19,9 +15,9 @@ class App extends Component {
               <span class="rightscale_logo"></span>
             </a>
             <div class="export_link">
-              <a class="button default small" data-placement="bottom" ng-click="openExport()">
+              <span class="button default small" data-placement="bottom" ng-click="openExport()">
                 <span class="text">Export all data</span>
-              </a>
+              </span>
             </div>
           </header>
           <section class="clouds-wrapper" ng-class="{'filters-visible': filters_visible}">
@@ -33,19 +29,21 @@ class App extends Component {
                       <div class="logo"></div>
                       <span class="button secondary subscribe">Subscribe to Updates</span>
                     </th>
-                    {vendors.map(vendor => { return (
+
+                    { main.vendors.map(vendor => { return (
                       <th class={vendor.short_name}>
                         <div class="logo">
-                          <img src={'/'+vendor.logo}></img>
+                          <img src={'/'+vendor.logo} alt={vendor.short_name}></img>
                         </div>
                       </th>
-                    )})}
+                    ) }) }
+
                   </tr>
                 </thead>
                 <tbody ng-class="{'filters-selected': total_selected_filters > 0}">
 
                   {sections_fields.map(field => { return (
-                    <Field field={field} sections={sections[field]} />
+                    <Section field={field} sections={main.sections[field]} />
                   )})}
 
                 </tbody>
