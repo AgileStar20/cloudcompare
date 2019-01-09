@@ -2,6 +2,25 @@ import React, { Component } from 'react';
 import Section from './components/section';
 import main from './services/main';
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.clean = this.clean.bind(this);
+    this.refresh = this.refresh.bind(this);
+  }
+  refresh(){
+    this.setState({
+      showComponent: true
+    });
+  }
+  clean(){
+    for(let each in main.checkboxes){
+      main.checkboxes[each] = false;
+    }
+    main.clean = false;
+    this.setState({
+      showComponent: true
+    });
+  }
   render() {
     let sections_fields = [];
     for(let key in main.sections){
@@ -10,6 +29,13 @@ class App extends Component {
     return (
       <div class="page-content layout--lg">
         <div class="wrapper">
+
+          { main.clean && (
+            <div class="sidebar--batch-action">
+              <span class="clear" onClick={this.clean}>Clear All</span>
+            </div>
+          ) }
+          
           <header class="app_header">
             <a class="product_logo_wrap" href="/">
               <span class="rightscale_logo"></span>
@@ -43,7 +69,7 @@ class App extends Component {
                 <tbody ng-class="{'filters-selected': total_selected_filters > 0}">
 
                   {sections_fields.map(field => { return (
-                    <Section field={field} sections={main.sections[field]} />
+                    <Section field={field} sections={main.sections[field]} refresh={this.refresh} />
                   )})}
 
                 </tbody>

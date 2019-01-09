@@ -6,21 +6,36 @@ class Section extends Component{
   constructor(props){
     super(props);
     this.toggle = this.toggle.bind(this);
-    this.load = this.load.bind(this);
+    this.refresh = this.refresh.bind(this);
   }
   // Events
   show = true;
   toggle(){
     this.show = !this.show;
-    this.load();
+    this.refresh();
   }
-  load(){
+  refresh(){
     this.setState({
       showComponent: true
     });
+    if(main.clean){
+      for(let each in main.checkboxes){
+        if(main.checkboxes[each]) return;
+      }
+      main.clean = false;
+      this.props.refresh();
+    }else{
+      for(let each in main.checkboxes){
+        if(main.checkboxes[each]){
+          main.clean = true;
+          return this.props.refresh();
+        }
+      }
+
+    }
   }
 
-  // Html
+  // html
   render() {
     let st = "section-super-title";
     if(this.show) st += ' collapsed';
@@ -34,7 +49,7 @@ class Section extends Component{
           </th>
         </tr>
         { this.show && (
-          <Field field={this.props.field} sections={this.props.sections} load={this.load} />
+          <Field field={this.props.field} sections={this.props.sections} refresh={this.refresh} />
         ) }
         <tr></tr>
       </div>

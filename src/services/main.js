@@ -10,6 +10,7 @@ const main = {
 	sections: sections,
 	vendors: vendors,
 	options: options,
-	checkboxes: {}
+	checkboxes: {},
+	clean: false
 }
 export default main;
