@@ -18,20 +18,7 @@ class Section extends Component{
     this.setState({
       showComponent: true
     });
-    if(main.clean){
-      for(let each in main.checkboxes){
-        if(main.checkboxes[each]) return this.props.refresh();
-      }
-      main.clean = false;
-      this.props.refresh();
-    }else{
-      for(let each in main.checkboxes){
-        if(main.checkboxes[each]){
-          main.clean = true;
-          return this.props.refresh();
-        }
-      }
-    }
+    this.props.refresh();
   }
 
   // html

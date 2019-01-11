@@ -10,20 +10,7 @@ class Row extends Component{
 	// Events
 	toggle(e, i){
 		main.checkboxes[this.field+i]=!main.checkboxes[this.field+i];
-		main.total = 0;
-		for (var i = 0; i < main.vendors.length; i++) {
-			main.vendors[i]._total = 0;
-		}
-		for(let each in main.checkboxes){
-			if(main.checkboxes[each]){
-				main.total++;
-				for (var i = 0; i < main.vendors.length; i++) {
-					if(main.vendors[i][each.split('-')[0]][each.split('-')[1]].state){
-						main.vendors[i]._total++;
-					}
-				}
-			}
-		}
+		main.toggle();
 		this.props.refresh(true);
 	}
 	// html

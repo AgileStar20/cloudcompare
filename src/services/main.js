@@ -19,4 +19,32 @@ const main = {
 	total: 0,
 	clean: false
 };
+main.toggle = function(){
+	main.total = 0;
+	for (var i = 0; i < main.vendors.length; i++) {
+		main.vendors[i]._total = 0;
+	}
+	for(let each in main.checkboxes){
+		if(main.checkboxes[each]){
+			main.total++;
+			for (var i = 0; i < main.vendors.length; i++) {
+				if(main.vendors[i][each.split('-')[0]][each.split('-')[1]].state){
+					main.vendors[i]._total++;
+				}
+			}
+		}
+	}
+  if(main.clean){
+    for(let each in main.checkboxes){
+      if(main.checkboxes[each]) return;
+    }
+    main.clean = false;
+  }else{
+    for(let each in main.checkboxes){
+      if(main.checkboxes[each]){
+        return main.clean = true;
+      }
+    }
+  }
+}
 export default main;
