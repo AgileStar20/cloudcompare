@@ -23,8 +23,8 @@ class Field extends Component{
 	// html
 	render(){
 		return this.props.sections.map((section, index) => { return (
-			<div>
-				<tr class="section-title" onClick={e=>{this.toggle(index)}} ng-class="{active: show_feature_rows[feature_key]}">
+			<React.Fragment>
+				<tr class="section-title" onClick={e=>{this.toggle(index)}}>
 					<th>
 						<h4>{section.label}</h4>
 						{this.count(section.key+index)}
@@ -33,7 +33,7 @@ class Field extends Component{
 				{ !this.show[index] && (
 					<Row field={this.props.field} sections={this.props.sections} section={section} index={index} refresh={this.refresh} />
 				) }
-			</div>
+			</React.Fragment>
 		) } )
 	}
 	count(label){

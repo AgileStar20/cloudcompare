@@ -20,7 +20,7 @@ class Section extends Component{
     });
     if(main.clean){
       for(let each in main.checkboxes){
-        if(main.checkboxes[each]) return;
+        if(main.checkboxes[each]) return this.props.refresh();
       }
       main.clean = false;
       this.props.refresh();
@@ -31,7 +31,6 @@ class Section extends Component{
           return this.props.refresh();
         }
       }
-
     }
   }
 
@@ -41,7 +40,7 @@ class Section extends Component{
     if(this.show) st += ' collapsed';
     else st += ' expanded';
     return (
-      <div>
+      <React.Fragment>
         <tr class={st} onClick={this.toggle}>
           <th>
             <h2>{this.props.field}</h2>
@@ -52,7 +51,7 @@ class Section extends Component{
           <Field field={this.props.field} sections={this.props.sections} refresh={this.refresh} />
         ) }
         <tr></tr>
-      </div>
+      </React.Fragment>
     )
   }
   count(){
