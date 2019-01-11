@@ -17,30 +17,25 @@ class Row extends Component{
 		return (
 			<tr>
 				<td ng-controller="FilterOptionsController" class="filter-features">
-
-					<filter-option-selector filter-option="getFilterOptions($parent.$parent.$index, feature_key)" feature-key="feature_key" selected-filters="selected_filters" />
-
 					<section class="sidebar--filter">
-					  <span class="sidebar--title mobile" ng-click="filter_option.expanded = !filter_option.expanded" ng-class="{'expanded': filter_option.expanded, 'collapsed': !filter_option.expanded}">
-						 <span>| filter_option.label |</span>
-						</span>
-					  <ul class="sidebar--list">
+						<ul class="sidebar--list">
 						{main.options[this.props.index].values.map((value, i) => { return (
-						  <li class="sidebar--option |filter_option.key|-|$index|">
-							<label class="checkbox_wrap">
-							  <input type="checkbox" value={main.checkboxes[this.field+i]} onChange={e=>{this.toggle(e, i)}}/>
-							  <span class="checkbox_label">{value}</span>
-							</label>
-						  </li>
+							<li class="true sidebar--option checked">
+							{/*|filter_option.key|-|$index| */}
+								<label class="checkbox_wrap">
+									<input type="checkbox" checked={main.checkboxes[this.field+i]||false} onChange={e=>{this.toggle(e, i)}}/>
+									<span class="checkbox_label">{value}</span>
+								</label>
+							</li>
 						)})}
-					  </ul>
+						</ul>
 					</section>
 				</td>
-			  {main.vendors.map(vendor => { return (
+				{main.vendors.map(vendor => { return (
 				<td class={'cloud-cell '+vendor.short_name}>
 					{this.data(vendor[this.props.section.key])}
 				</td>
-			  )})}
+				)})}
 			</tr>
 		);
 	}
@@ -49,7 +44,8 @@ class Row extends Component{
 			return (
 				<ul>
 				{arr.map(feature => { return (
-					<li class={feature.state}>
+					<li class="true sidebar--option checked">
+					{/*<li class={feature.state}>*/}
 					<a href={feature.url} target="_blank" rel="noopener noreferrer" ng-switch-default>{feature.display} <span class="icon external-link left" /></a>
 					</li>
 				)})}
