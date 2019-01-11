@@ -6,7 +6,12 @@ for (var i = 0; i < options.length; i++) {
 		return p.name;
 	});
 }
+let sections_fields = [];
+for (let key in sections) {
+	sections_fields.push(key);
+}
 const main = {
+	sections_fields: sections_fields,
 	sections: sections,
 	vendors: vendors,
 	options: options,

@@ -24,7 +24,7 @@ class Field extends Component{
 	render(){
 		return this.props.sections.map((section, index) => { return (
 			<React.Fragment>
-				<tr class="section-title" onClick={e=>{this.toggle(index)}}>
+				<tr className="section-title" onClick={e=>{this.toggle(index)}}>
 					<th>
 						<h4>{section.label}</h4>
 						{this.count(section.key+index)}
@@ -41,7 +41,7 @@ class Field extends Component{
 		for(let key in main.checkboxes){
 			if(key.indexOf(label)>-1 && main.checkboxes[key]) count++;
 		}
-		if(count) return (<span class="filter-count"><strong>{count}</strong> filters selected</span>);
+		if(count) return (<span className="filter-count"><strong>{count}</strong> filters selected</span>);
 	}
 }
 export default Field

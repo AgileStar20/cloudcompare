@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Section from './components/section';
+import mField from './components/mField';
 import main from './services/main';
 
 class App extends Component {
@@ -25,90 +26,89 @@ class App extends Component {
 		}
 
 		render() {
-				let sections_fields = [];
-				for (let key in main.sections) {
-					sections_fields.push(key);
-				}
 				return (
 					<React.Fragment>
-						<div class="page-content layout--lg">
-							<div class="wrapper">
+						<div className="page-content layout--lg">
+							<div className="wrapper">
 
 									{main.clean && (
-											<div class="sidebar--batch-action">
-													<span class="clear" onClick={this.clean}>Clear All</span>
+											<div className="sidebar--batch-action">
+													<span className="clear" onClick={this.clean}>Clear All</span>
 											</div>
 									)}
 
-									<header class="app_header">
-										<a class="product_logo_wrap" href="/">
-												<span class="rightscale_logo"></span>
+									<header className="app_header">
+										<a className="product_logo_wrap" href="/">
+												<span className="rightscale_logo"></span>
 										</a>
-										<div class="export_link">
-										<span class="button default small" data-placement="bottom" ng-click="openExport()">
-											<span class="text">Export all data</span>
+										<div className="export_link">
+										<span className="button default small" data-placement="bottom" ng-click="openExport()">
+											<span className="text">Export all data</span>
 										</span>
 										</div>
 									</header>
-									<section class="clouds-wrapper" ng-class="{'filters-visible': filters_visible}">
-											<section class="clouds">
-													<table>
-															<thead>
-															<tr>
-																	<th class="filter-features">
-																			<div class="logo"></div>
-																			<span class="button secondary subscribe">Subscribe to Updates</span>
-																	</th>
+									<section className="clouds-wrapper" ng-class="{'filters-visible': filters_visible}">
+										<section className="clouds">
+											<table>
+												<thead>
+												<tr>
+													<th className="filter-features">
+														<div className="logo"></div>
+														<span className="button secondary subscribe">Subscribe to Updates</span>
+													</th>
 
-																	{main.vendors.map(vendor => {
-																			return (
-																					<th class={vendor.short_name}>
-																							<div class="logo">
-																									<img src={'/' + vendor.logo} alt={vendor.short_name}></img>
-																							</div>
+													{main.vendors.map(vendor => {
+														let perc = 0;
+														if(vendor._total&&main.total) perc = parseInt(vendor._total / main.total * 100);
+														let style = {
+															'background': 'linear-gradient(90deg, rgba(128, 193, 26, 0.9) 0%, rgba(128, 193, 26, 0.95) ' + perc + '%, rgba(244, 245, 247, 0.5) ' + perc + '%)'
+														}
+														return (
+															<th className={vendor.short_name}>
+																<div className="logo">
+																		<img src={'/' + vendor.logo} alt={vendor.short_name}></img>
+																</div>
 
-																							{main.clean && (
-																							<div class="score">
-																								<span class="nga-fast nga-collapse nga-stagger-slow">
-																									<span class="fraction">
-																										<strong>{vendor._total}</strong> of <strong>{main.total} </strong>
-																										<span class="desc-text">filters match</span>
-																									</span>
-																								</span>
-																								<div class="percentage-bar"></div>
-																							</div>
-																							)}
+																{main.clean && (
+																<div className="score">
+																	<span className="nga-fast nga-collapse nga-stagger-slow">
+																		<span className="fraction">
+																			<strong>{vendor._total}</strong> of <strong>{main.total} </strong>
+																			<span className="desc-text">filters match</span>
+																		</span>
+																	</span>
+																	<div className="percentage-bar" style={style}></div>
+																</div>
+																)}
+															</th>
+														)
+													})}
 
-																							
-																					</th>
-																			)
-																	})}
+												</tr>
+												</thead>
+												<tbody ng-class="{'filters-selected': total_selected_filters > 0}">
 
-															</tr>
-															</thead>
-															<tbody ng-class="{'filters-selected': total_selected_filters > 0}">
+												{main.sections_fields.map(field => {
+														return (
+																<Section field={field} sections={main.sections[field]} refresh={this.refresh}/>
+														)
+												})}
 
-															{sections_fields.map(field => {
-																	return (
-																			<Section field={field} sections={main.sections[field]} refresh={this.refresh}/>
-																	)
-															})}
-
-															</tbody>
-													</table>
-											</section>
-											<section class="footer">
-											<span class="footer-legal">
-												&copy; 2016-2018 RightScale, Inc.
-											</span>
-																		<span class="last-updated">
-												Last updated: 2018/08/20
-											</span>
-											</section>
+												</tbody>
+											</table>
+										</section>
+										<section className="footer">
+										<span className="footer-legal">
+											&copy; 2016-2018 RightScale, Inc.
+										</span>
+																	<span className="last-updated">
+											Last updated: 2018/08/20
+										</span>
+										</section>
 									</section>
-									<section class="filter">
-											<span ng-click="openHelp()" class="help-button"></span>
-											<span ng-click="openCopy()" class="copyright-button"></span>
+									<section className="filter">
+											<span ng-click="openHelp()" className="help-button"></span>
+											<span ng-click="openCopy()" className="copyright-button"></span>
 									</section>
 							</div>
 						</div>
@@ -136,23 +136,38 @@ class App extends Component {
 														<thead>
 														<tr>
 																{main.vendors.map(vendor => {
+																		let perc = 0;
+																		if(vendor._total&&main.total) perc = parseInt(vendor._total / main.total * 100);
+																		let style = {
+																			'background': 'linear-gradient(90deg, rgba(128, 193, 26, 0.9) 0%, rgba(128, 193, 26, 0.95) ' + perc + '%, rgba(244, 245, 247, 0.5) ' + perc + '%)'
+																		}
 																		return (
-																				<th className={vendor.short_name + ' checked'}>
-																						<div className="logo">
-																								<img src={'/' + vendor.logo_mobile} alt={vendor.short_name}></img>
-																						</div>
-																						{/*<vendor-percentage-bar vendor="vendor"></vendor-percentage-bar>*/}
-																				</th>
+																			<th className={vendor.short_name + ' checked'}>
+																				<div className="logo">
+																						<img src={'/' + vendor.logo_mobile} alt={vendor.short_name}></img>
+																				</div>
+																				{main.clean && (
+																				<div className="score">
+																					<span className="nga-fast nga-collapse nga-stagger-slow">
+																						<span className="fraction">
+																							<strong>{vendor._total}</strong> of <strong>{main.total} </strong>
+																							<span className="desc-text">filters match</span>
+																						</span>
+																					</span>
+																					<div className="percentage-bar" style={style}></div>
+																				</div>
+																				)}
+																			</th>
 																		)
 																})}
 														</tr>
 														</thead>
 														<tbody ng-class="{'filters-selected': total_selected_filters > 0}">
 
-														{sections_fields.map(field => {
-																return (
-																		<Section field={field} sections={main.sections[field]} refresh={this.refresh}/>
-																)
+														{main.sections_fields.map(field => {
+															return (
+																<Section field={field} sections={main.sections[field]} refresh={this.refresh}/>
+															)
 														})}
 
 														</tbody>
@@ -160,14 +175,24 @@ class App extends Component {
 												</table>
 										</section>
 								</section>
-								{/*<section className="sidebar" ng-controller="FilterOptionsController">*/}
-								{/*<div className="sidebar--batch-action">*/}
-								{/*<span className="expand" onClick="expandAll" ng-class="{'expanded': isExpanded()}">*/}
-								{/*<img src="images/icon-chevron-white.svg"><span>|isExpanded() ? 'Collapse All' : 'Expand All'|</span>*/}
-								{/*<span className="clear" ng-show="hasAnySelectedFilters()" ng-click="clearAll()">Clear All</span>*/}
-								{/*</div>*/}
-								{/*<filter-option-selector ng-repeat="filter_option in filter_options" filter-option="filter_option" selected-filters="selected_filters">*/}
-								{/*</section>*/}
+								<section className="sidebar" ng-controller="FilterOptionsController">
+									<div className="sidebar--batch-action">
+										{/*<span className="expand" onClick="expandAll" ng-class="{'expanded': isExpanded()}">
+											<img src="images/icon-chevron-white.svg"><span>|isExpanded() ? 'Collapse All' : 'Expand All'|</span>
+										<span className="clear" ng-show="hasAnySelectedFilters()" ng-click="clearAll()">Clear All</span>*/}
+									</div>
+								
+									{/*<mField index={index} section={section} refresh={this.refresh}>{field}</mField>*/}
+
+								{main.sections_fields.map(field => {
+									main.sections[field].map((section, index) => {
+										console.log(section);
+										return (
+											<div>{section.label}</div>
+									)});
+								})}
+
+								</section>
 								<section className="footer" id="last">
 										<span className="footer-legal">
 												&copy; 2016-2018 RightScale, Inc.

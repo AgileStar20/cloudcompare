@@ -41,7 +41,7 @@ class Section extends Component{
     else st += ' expanded';
     return (
       <React.Fragment>
-        <tr class={st} onClick={this.toggle}>
+        <tr className={st} onClick={this.toggle}>
           <th>
             <h2>{this.props.field}</h2>
             {this.count()}
@@ -60,7 +60,7 @@ class Section extends Component{
       if(key.indexOf(this.props.field)>-1 && main.checkboxes[key]) count++;
     }
     if(!count) return '';
-    return (<span class="filter-count"><strong>{count}</strong> filters selected</span>);
+    return (<span className="filter-count"><strong>{count}</strong> filters selected</span>);
   }
 }
 export default Section

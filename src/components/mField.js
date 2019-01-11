@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import main from '../services/main';
-
-class Row extends Component{
+console.log('called');
+class mField extends Component{
 	constructor(props){
+		console.log('we are in');
 		super(props);
 		this.toggle = this.toggle.bind(this);
+		console.log(this.props.section);
 		this.field = this.props.section.key+'-';
 	}
 	// Events
@@ -29,28 +31,23 @@ class Row extends Component{
 	// html
 	render(){
 		return (
-			<tr>
-				<td className="filter-features">
-					<section className="sidebar--filter">
-						<ul className="sidebar--list">
-						{main.options[this.props.index].values.map((value, i) => { return (
-							<li className={"sidebar--option "+this.props.section.key+'-'+i+(main.checkboxes[this.field+i]&&' checked'||'')}>
-								<label className="checkbox_wrap">
-									<input type="checkbox" checked={main.checkboxes[this.field+i]||false} onChange={e=>{this.toggle(e, i)}}/>
-									<span className="checkbox_label">{value}</span>
-								</label>
-							</li>
-						)})}
-						</ul>
-					</section>
-				</td>
-				{main.vendors.map(vendor => { return (
-				<td className={'cloud-cell '+vendor.short_name}>
-					{this.data(vendor[this.props.section.key])}
-				</td>
-				)})}
-			</tr>
-		);
+			<React.Fragment>
+				<section class="sidebar--filter">
+					<span class="sidebar--title mobile">
+					{/* ng-click="filter_option.expanded = !filter_option.expanded" ng-class="{'expanded': filter_option.expanded, 'collapsed': !filter_option.expanded}"*/}
+						<span>{this.props.section.label}</span>
+					</span>
+					<ul class="sidebar--list">
+						<li class="sidebar--option |filter_option.key|-|$index|" ng-repeat="value in filter_option.categories | orderBy:'toString()'">
+							<div class="checkbox_wrap">
+								<input type="checkbox" id="|filter_option.key|::|value|" name="|filter_option.key|[]" value="|value|" ng-model="selected_filters[filter_option.key][value]" />
+								<label for="|filter_option.key|::|value|" class="checkbox_label">| value |</label>
+							</div>
+						</li>
+					</ul>
+				</section>
+			</React.Fragment>
+		)
 	}
 	data(arr){
 		if(Array.isArray(arr)&&arr.length){
@@ -69,4 +66,4 @@ class Row extends Component{
 		}
 	}
 }
-export default Row
+export default mField
