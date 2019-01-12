@@ -1,6 +1,8 @@
 import sections from './sections';
 import vendors from './vendors';
 import options from './options';
+import _ from 'underscore'
+
 for (var i = 0; i < options.length; i++) {
 	options[i].values = vendors[0][options[i].values].map(function (p) {
 		return p.name;
@@ -46,5 +48,30 @@ main.toggle = function(){
       }
     }
   }
+}
+main.getSelectedFilters = () => {
+	let selected = {};
+
+	for(let key in main.checkboxes) {
+		let pairs = key.split('-');
+		if(!selected[pairs[0]]) {
+			selected[pairs[0]] = [pairs[1]];
+		}
+	}
+
+	for(let key in selected) {
+		const option = _.findWhere(main.options, {key: key});
+
+		if(option) {
+			const indexes =  selected[key];
+			selected[key] = [];
+
+			for(let i  = 0; i < indexes.length; i++) {
+				selected[key].push(option.values[indexes[i]]);
+			}
+		}
+	}
+
+	return selected;
 }
 export default main;
