@@ -28,7 +28,7 @@ var FormHandler = {
 				return field.id;
 			});
 
-			var valid = invalid_fields.length == 0,
+			var valid = invalid_fields.length === 0,
 				form_message = form.find(".message");
 
 			var email = $("input[type='email']").val();
@@ -54,7 +54,7 @@ var FormHandler = {
 
 	validate_existence_of_input: function (event) {
 		var target = $(event.target),
-			blank = target.val() == '';
+			blank = target.val() === '';
 		if (!blank) {
 			target.removeClass('invalid');
 		}
@@ -85,9 +85,9 @@ var FormHandler = {
 		}
 		if ($("div").hasClass('select-demo')) {
 			$("#SFDC_Campaign_ID__c").attr('value', checked_value);
-			if ($("input[type=radio]:checked").attr('id') == "select_optima") {
+			if ($("input[type=radio]:checked").attr('id') === "select_optima") {
 				$("#Offer_Source__c").attr('value', 'Request Optima Demo');
-			} else if ($("input[type=radio]:checked").attr('id') == "select_cmp") {
+			} else if ($("input[type=radio]:checked").attr('id') === "select_cmp") {
 				$("#Offer_Source__c").attr('value', 'Request CMP Demo');
 			}
 		} else {
@@ -98,7 +98,7 @@ var FormHandler = {
 	prevent_email_population: function (field) {
 		var value = field.val();
 
-		if (field.attr("name") != "email") {
+		if (field.attr("name") !== "email") {
 			if (value.match(/.[@]/)) {
 				field.addClass("invalid");
 			}
@@ -122,7 +122,7 @@ var FormHandler = {
 
 		var found_fields = fields_in_form.filter(function (n, field) {
 			var name = $(field).attr('name');
-			var found = fields_to_gather.indexOf(name) != -1
+			var found = fields_to_gather.indexOf(name) !== -1
 			return found;
 		});
 
@@ -148,9 +148,9 @@ var FormHandler = {
 			});
 
 			// Putting in logic to gather multiple checkbox functionality for re:Invent LP. Need to generify later
-			$("input[name='infrastructure']:checked").val()
-			var cloudOption = $("input[name='infrastructure']:checked");
-			var selectedClouds = [];
+			$("input[name='infrastructure']:checked").val();
+			let cloudOption = $("input[name='infrastructure']:checked");
+			let selectedClouds = [];
 			cloudOption.each(function () {
 				selectedClouds.push($(this).val());
 			});
@@ -168,7 +168,6 @@ var FormHandler = {
 				marketing_data["Signup_RS_Account__c"] = additional_fields["account_id"];
 				marketing_data["RS_User_ID__c"] = additional_fields["user_id"];
 			}
-
 
 			return $.ajax({
 				type: "POST",
@@ -188,7 +187,7 @@ var FormHandler = {
 
 	handle_marketing_response: function (event) {
 		var form = this.form,
-			asset_label = form.find("input[name='asset_label']").val(),
+			// asset_label = form.find("input[name='asset_label']").val(),
 			employee_size = form.find("input[name='NumberOfEmployees']").val(),
 			country_list = ["Australia", "Canada", "Denmark", "Great Britain", "Hong Kong", "Israel", "Malaysia", "Netherlands", "New Zealand", "Norway", "Sweden", "Switzerland", "Turkey", "United Kingdom", "UK", "GBR", "USA", "England", "United States"],
 			country = form.find("input[name='country']").val();
@@ -197,8 +196,6 @@ var FormHandler = {
 				$("#cm_redirect").attr("action", "/premium-free-trial-offer-enterprise")
 			}
 			$('#cm_redirect').submit();
-
-
 		} else if (form.hasClass("all-export")) {
 			// jQuery.magnificPopup.open({items: {src: '#thank-you-all'}});
 		} else if (form.hasClass("selected-export")) {
@@ -210,12 +207,11 @@ var FormHandler = {
 
 	handle_submit: function (event) {
 		var form = $(event.target);
-		if (form.attr("id") == "cm_redirect") {
+		if (form.attr("id") === "cm_redirect") {
 			return true;
 		}
 		event.stopPropagation();
-		var status = FormHandler.validate(event),
-			has_action = form.attr("action") != "";
+		var status = FormHandler.validate(event);
 		$.data(document.body, "form", form);
 
 		if (!status) {
@@ -226,14 +222,13 @@ var FormHandler = {
 		FormHandler.send_marketing_data(form, FormHandler.handle_marketing_response);
 
 		var form_name = $('#FormName').val();
-		if (form_name != "Contact_Us") {
+		if (form_name !== "Contact_Us") {
 			// jQuery.magnificPopup.open({items: {src: '#processing'}});
 		}
 		event.preventDefault();
 		return false;
 	}
 };
-
 // jQuery(document).ready(
 // 	function ($) {
 // 		$("input[type='email']").blur(FormHandler.validate_email);

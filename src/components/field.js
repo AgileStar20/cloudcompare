@@ -31,7 +31,7 @@ class Field extends Component{
 					</th>
 				</tr>
 				{ !this.show[index] && (
-					<Row field={this.props.field} sections={this.props.sections} section={section} index={index} refresh={this.refresh} />
+					<Row  field={this.props.field} section={section} index={index} refresh={this.refresh} />
 				) }
 			</React.Fragment>
 		) } )

@@ -96,13 +96,12 @@ class App extends Component {
 
 			let fields_to_gather = [];
 			let form = $("form");
-
-			form.find("input").map(function (i, field) {
+			form.find("input").each(function (i, field) {
 				if (field.type.match(/text|email|tel|hidden|radio|checkbox/)) {
 					fields_to_gather.push(field.name);
 				}
 			});
-			form.find("select").map(function (i, field) {
+			form.find("select").each(function (i, field) {
 				fields_to_gather.push(field.name);
 			});
 
@@ -228,77 +227,79 @@ class App extends Component {
     exportAll = () => {
         let data = [];
         let email, recipients;
+	    let section = "";
+	    let mainCategory = "";
 
         for (var category in main.vendors[0]) {
             var currentCategory = main.vendors[0][category];
             switch(category) {
                 case "vm_sizes":
-                    var section = "Basic";
-                    var mainCategory = "VM Sizes";
+                    section = "Basic";
+                    mainCategory = "VM Sizes";
                     break;
                 case "sla_terms":
-                    var section = "Basic";
-                    var mainCategory = "SLA Terms";
+                    section = "Basic";
+                    mainCategory = "SLA Terms";
                     break;
                 case "certifications":
-                    var section = "Basic";
-                    var mainCategory = "Certifications";
+                    section = "Basic";
+                    mainCategory = "Certifications";
                     break;
                 case "operating_systems":
-                    var section = "Basic";
-                    var mainCategory = "Operating Systems";
+                    section = "Basic";
+                    mainCategory = "Operating Systems";
                     break;
                 case "regions":
-                    var section = "Basic";
-                    var mainCategory = "Regions";
+                    section = "Basic";
+                    mainCategory = "Regions";
                     break;
                 case "countries":
-                    var section = "Basic";
-                    var mainCategory = "Countries";
+                    section = "Basic";
+                    mainCategory = "Countries";
                     break;
                 case "compute_services":
-                    var section = "Core Services";
-                    var mainCategory = "Compute Services";
+                    section = "Core Services";
+                    mainCategory = "Compute Services";
                     break;
                 case "network_services":
-                    var section = "Core Services";
-                    var mainCategory = "Network Services";
+                    section = "Core Services";
+                    mainCategory = "Network Services";
                     break;
                 case "storage_services":
-                    var section = "Core Services";
-                    var mainCategory = "Storage Services";
+                    section = "Core Services";
+                    mainCategory = "Storage Services";
                     break;
                 case "relational_dbs":
-                    var section = "Database Services";
-                    var mainCategory = "Relational Databases";
+                    section = "Database Services";
+                    mainCategory = "Relational Databases";
                     break;
                 case "nonrelational_dbs":
-                    var section = "Database Services";
-                    var mainCategory = "Non_Relational Databases";
+                    section = "Database Services";
+                    mainCategory = "Non_Relational Databases";
                     break;
                 case "other_dbs":
-                    var section = "Database Services";
-                    var mainCategory = "Other DBaaS";
+                    section = "Database Services";
+                    mainCategory = "Other DBaaS";
                     break;
                 case "data_analytics_services":
-                    var section = "Additional Services";
-                    var mainCategory = "Data & Analytics Services";
+                    section = "Additional Services";
+                    mainCategory = "Data & Analytics Services";
                     break;
                 case "ai_machine_learning":
-                    var section = "Additional Services";
-                    var mainCategory = "AI and Machine Learning";
+                    section = "Additional Services";
+                    mainCategory = "AI and Machine Learning";
                     break;
                 case "application_services":
-                    var section = "Additional Services";
-                    var mainCategory = "Application Services";
+                    section = "Additional Services";
+                    mainCategory = "Application Services";
                     break;
                 case "security_identity":
-                    var section = "Additional Services";
-                    var mainCategory = "Security & Identity";
+                    section = "Additional Services";
+                    mainCategory = "Security & Identity";
                     break;
                 default:
-                    var section = "N/A";
-                    var mainCategory = "N/A";
+                    section = "N/A";
+                    mainCategory = "N/A";
             }
 
             if (currentCategory instanceof Array === false) {
@@ -498,6 +499,8 @@ class App extends Component {
     exportSelected = () => {
 	    let data = [];
 	    let email, recipients;
+	    let section = "";
+	    let mainCategory = "";
 
 	    let returnSelected = _(main.getSelectedFilters()).mapValues(function (values) {
 		    return _(values).pickBy(_.identity).keys().value();
@@ -531,70 +534,70 @@ class App extends Component {
 	    for (let selectedFilter in returnSelected) {
 		    switch(selectedFilter) {
 			    case "vm_sizes":
-				    var section = "Basic";
-				    var mainCategory = "VM Sizes";
+				    section = "Basic";
+				    mainCategory = "VM Sizes";
 				    break;
 			    case "sla_terms":
-				    var section = "Basic";
-				    var mainCategory = "SLA Terms";
+				    section = "Basic";
+				    mainCategory = "SLA Terms";
 				    break;
 			    case "certifications":
-				    var section = "Basic";
-				    var mainCategory = "Certifications";
+				    section = "Basic";
+				    mainCategory = "Certifications";
 				    break;
 			    case "operating_systems":
-				    var section = "Basic";
-				    var mainCategory = "Operating Systems";
+				    section = "Basic";
+				    mainCategory = "Operating Systems";
 				    break;
 			    case "regions":
-				    var section = "Basic";
-				    var mainCategory = "Regions";
+				    section = "Basic";
+				    mainCategory = "Regions";
 				    break;
 			    case "countries":
-				    var section = "Basic";
-				    var mainCategory = "Countries";
+				    section = "Basic";
+				    mainCategory = "Countries";
 				    break;
 			    case "compute_services":
-				    var section = "Core Services";
-				    var mainCategory = "Compute Services";
+				    section = "Core Services";
+				    mainCategory = "Compute Services";
 				    break;
 			    case "network_services":
-				    var section = "Core Services";
-				    var mainCategory = "Network Services";
+				    section = "Core Services";
+				    mainCategory = "Network Services";
 				    break;
 			    case "storage_services":
-				    var section = "Core Services";
-				    var mainCategory = "Storage Services";
+				    section = "Core Services";
+				    mainCategory = "Storage Services";
 				    break;
 			    case "relational_dbs":
-				    var section = "Database Services";
-				    var mainCategory = "Relational Databases";
+				    section = "Database Services";
+				    mainCategory = "Relational Databases";
 				    break;
 			    case "nonrelational_dbs":
-				    var section = "Database Services";
-				    var mainCategory = "Non_Relational Databases";
+				    section = "Database Services";
+				    mainCategory = "Non_Relational Databases";
 				    break;
 			    case "other_dbs":
-				    var section = "Database Services";
-				    var mainCategory = "Other DBaaS";
+				    section = "Database Services";
+				    mainCategory = "Other DBaaS";
 				    break;
 			    case "data_analytics_services":
-				    var section = "Additional Services";
-				    var mainCategory = "Data & Analytics Services";
+				    section = "Additional Services";
+				    mainCategory = "Data & Analytics Services";
 				    break;
 			    case "application_services":
-				    var section = "Additional Services";
-				    var mainCategory = "Application Services";
+				    section = "Additional Services";
+				    mainCategory = "Application Services";
 				    break;
 			    case "security_identity":
-				    var section = "Additional Services";
-				    var mainCategory = "Security & Identity";
+				    section = "Additional Services";
+				    mainCategory = "Security & Identity";
 				    break;
 			    default:
-				    var section = "N/A";
-				    var mainCategory = "N/A";
+				    section = "N/A";
+				    mainCategory = "N/A";
 		    }
-		    for (var j = 0; j < returnSelected[selectedFilter].length; ++j) {
+		    for (let j = 0; j < returnSelected[selectedFilter].length; ++j) {
 			    data.push(getServiceStateInClouds(returnSelected[selectedFilter][j]));
 		    }
 	    }
@@ -919,16 +922,6 @@ class App extends Component {
 															})}
 													</tr>
 													</thead>
-													<tbody ng-class="{'filters-selected': total_selected_filters > 0}">
-
-													{main.sections_fields.map((field, key) => {
-														return (
-															<Section key={key} field={field} sections={main.sections[field]} refresh={this.refresh}/>
-														)
-													})}
-
-													</tbody>
-
 											</table>
 									</section>
 							</section>
@@ -949,14 +942,14 @@ class App extends Component {
 										if(this.show[sindex+''+index]) classAdded+=' expanded';
 										else classAdded+=' collapsed';
 										return (
-											<section className="sidebar--filter">
+											<section key={section.key} className="sidebar--filter">
 												<span className={classAdded} onClick={e=>{this.mtoggle(sindex, index)}}>
 													<span>{section.label}</span>
 												</span>
 								        { this.show[sindex+''+index] && (
 													<ul className="sidebar--list">
-														{main.options[index].values.map((value, i) => { return (
-															<li className={"sidebar--option "+section.key+'-'+i+(main.checkboxes[section.key+'-'+i]&&' checked'||'')}>
+														{main.options.find((opt) => { return opt.key === section.key}).values.map((value, i) => { return (
+															<li key={+section.key+'-'+i} className={"sidebar--option "+section.key+'-'+i+(main.checkboxes[section.key+'-'+i]&&' checked'||'')}>
 																<label className="checkbox_wrap">
 																	<input type="checkbox" checked={main.checkboxes[section.key+'-'+i]||false} onChange={e=>{this.toggle(section.key+'-', e, i)}}/>
 																	<span className="checkbox_label">{value}</span>
